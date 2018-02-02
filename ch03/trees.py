@@ -1,6 +1,7 @@
 # coding:utf-8
 
 from math import log
+import operator
 
 # 计算香农熵
 def calcShannonEnt(dataSet):
@@ -39,15 +40,13 @@ def createDataSet():
 
 def chooseBestFeatureToSplit(dataSet):
     numFeatures = len(dataSet[0]) - 1
-    baseEntropy = calcShannonEnt(dataSet)
+    baseEntropy = calcShannonEnt(dataSet)# 整个数据的香农熵
     bestInfoGain = 0.0
     bestFeature = -1
     for i in range(numFeatures):
-        # 创建分类标签
         featList = [example[i] for example in dataSet]
         uniqueVals = set(featList)
         newEntropy = 0.0
-
         # 计算每种划分方式的信息熵
         for value in uniqueVals:
             subDataSet = splitDataSet(dataSet, i, value)
@@ -62,6 +61,38 @@ def chooseBestFeatureToSplit(dataSet):
 
     return bestFeature
 
+# 选取出现频率最高的分类名称
+def majorityCnt(classList):
+    classCount = {}
+    for vote in classList:
+        if vote not in classCount.keys():
+            classCount[vote] = 0
+        classCount[vote] += 1
+    sortedClassCount = sorted(classCount.iteritems(), key=operator.itemgetter(1), reverse=True)
+    return sortedClassCount[0][0]
+
+def createTree(dataSet, labels):
+    classList = [example[-1] for example in dataSet]
+    # 类别完全相同则停止继续划分
+    if classList.count((classList[0])) == len(classList):
+        return classList[0]
+    # 遍历完所有特征返回出现次数最多的
+    if len(dataSet[0]) == 1:
+        return majorityCnt(classList)
+    bestFeat = chooseBestFeatureToSplit(dataSet)
+    bestFeatLabel = lables[bestFeat]
+    myTree = {bestFeatLabel:{}}
+    del(lables[bestFeat])
+    featValues = [example[bestFeat] for example in dataSet]
+    uniqueVals = set(featValues)
+    for value in uniqueVals:
+        subLabels = labels[:]
+        myTree[bestFeatLabel][value] = createTree(splitDataSet(dataSet, bestFeat, value), subLabels)
+
+    return myTree
+
+
 if __name__ == "__main__":
     dataSet, lables = createDataSet()
-    print splitDataSet(dataSet, 1, 0)
+    print(createTree(dataSet, lables))
+    # print chooseBestFeatureToSplit(dataSet)
