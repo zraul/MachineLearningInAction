@@ -2,6 +2,7 @@
 
 from math import log
 import operator
+import treePlotter
 
 # 计算香农熵
 def calcShannonEnt(dataSet):
@@ -80,9 +81,9 @@ def createTree(dataSet, labels):
     if len(dataSet[0]) == 1:
         return majorityCnt(classList)
     bestFeat = chooseBestFeatureToSplit(dataSet)
-    bestFeatLabel = lables[bestFeat]
+    bestFeatLabel = labels[bestFeat]
     myTree = {bestFeatLabel:{}}
-    del(lables[bestFeat])
+    del(labels[bestFeat])
     featValues = [example[bestFeat] for example in dataSet]
     uniqueVals = set(featValues)
     for value in uniqueVals:
@@ -92,7 +93,39 @@ def createTree(dataSet, labels):
     return myTree
 
 
+def storetree(inputTree, filename):
+    import pickle
+    fw = open(filename, 'w')
+    pickle.dump(inputTree, fw)
+    fw.close()
+
+def grabTree(filename):
+    import pickle
+    fr = open(filename)
+    return pickle.load(fr)
+
+def classify(inputTree, featLabels, testVec):
+    firstStr = inputTree.keys()[0]
+    secondDir = inputTree[firstStr]
+    featIndex = featLabels.index(firstStr)
+    for key in secondDir.keys():
+        if testVec[featIndex] == key:
+            if type(secondDir[key]).__name__ == 'dict':
+                classLabel = classify(secondDir[key], featLabels, testVec)
+            else:
+                classLabel = secondDir[key]
+
+    return classLabel
+
 if __name__ == "__main__":
-    dataSet, lables = createDataSet()
-    print(createTree(dataSet, lables))
+    # dataSet, labels = createDataSet()
+    # myTree = treePlotter.retrieveTree(0)
+    # print(classify(myTree, labels, [1, 0]))
+    # print(classify(myTree, labels, [1, 1]))
     # print chooseBestFeatureToSplit(dataSet)
+    fr = open('lenses.txt')
+    lenses = [inst.strip().split('\t') for inst in fr.readlines()]
+    lensesLabels = ['age', 'prescript', 'astigmatic', 'tearRate']
+    lensesTree = createTree(lenses, lensesLabels)
+    print(lensesTree)
+    treePlotter.createPlot(lensesTree)
