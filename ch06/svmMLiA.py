@@ -27,3 +27,9 @@ def clipAlpha(aj, H, L):
         aj = L
 
     return aj
+
+def smoSimple(dataMatIn, classLabels, C, toler, maxIter):
+    dataMatrix = mat(dataMatIn)
+    labelMat = mat(classLabels).transpose()
+    b = 0
+    m, n = shape(dataMatrix)
