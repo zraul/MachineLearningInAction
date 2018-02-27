@@ -2,8 +2,14 @@
 
 from numpy import *
 
+#
+#
+# test error
+#
+#
+
 class optStruct:
-    def __init__(self, dataMatIn, classLabels, C, toler):
+    def __init__(self, dataMatIn, classLabels, C, toler, kTup):
         self.X = dataMatIn
         self.labelMat = classLabels
         self.C = C
@@ -12,9 +18,13 @@ class optStruct:
         self.alphas = mat(zeros((self.m, 1)))
         self.b = 0
         self.eCache = mat(zeros((self.m, 2)))
+        self.K = mat(zeros((self.m, self.m)))
+        for i in range(self.m):
+            self.K[:, i] = kernelTrans(self.X, self.X[i, :], kTup)
 
     def calcEk(self, k):
-        fXk = float(multiply(self.alphas, self.labelMat).T * (self.X * self.X[k, :].T)) + self.b
+        # fXk = float(multiply(self.alphas, self.labelMat).T * (self.X * self.X[k, :].T)) + self.b
+        fXk = float(multiply(self.alphas, self.labelMat).T * self.K[:, k] + self.b)
         Ek = fXk - float(self.labelMat[k])
         return Ek
 
@@ -63,7 +73,8 @@ class optStruct:
                 print "L == H"
                 return 0
 
-            eta = 2.0 * self.X[i, :] * self.X[j, :].T - self.X[i, :] * self.X[i, :].T - self.X[j, :] * self.X[j, :].T
+            # eta = 2.0 * self.X[i, :] * self.X[j, :].T - self.X[i, :] * self.X[i, :].T - self.X[j, :] * self.X[j, :].T
+            eta = 2.0 * self.K[i, j] - self.K[i, i] - self.K[j, j]
             if eta >= 0:
                 print "eta >= 0"
                 return 0
@@ -77,10 +88,14 @@ class optStruct:
             self.alphas[i] += self.labelMat[j] * self.labelMat[i] * (alphaJold - self.alphas[j])
             self.updateEk(i)
 
-            b1 = self.b - Ei - self.labelMat[i] * (self.alphas[i] - alphaIold) * self.X[i, :] * self.X[i, :].T - \
-                 self.labelMat[j] * (self.alphas[j] - alphaJold) * self.X[i, :] * self.X[j, :].T
-            b2 = self.b - Ej - self.labelMat[i] * (self.alphas[i] - alphaIold) * self.X[i, :] * self.X[j, :].T - \
-                 self.labelMat[j] * (self.alphas[j] - alphaJold) * self.X[j, :] * self.X[j, :].T
+            # b1 = self.b - Ei - self.labelMat[i] * (self.alphas[i] - alphaIold) * self.X[i, :] * self.X[i, :].T - \
+            #      self.labelMat[j] * (self.alphas[j] - alphaJold) * self.X[i, :] * self.X[j, :].T
+            # b2 = self.b - Ej - self.labelMat[i] * (self.alphas[i] - alphaIold) * self.X[i, :] * self.X[j, :].T - \
+            #      self.labelMat[j] * (self.alphas[j] - alphaJold) * self.X[j, :] * self.X[j, :].T
+            b1 = self.b - Ei -self.labelMat[i] * (self.alphas[i] - alphaIold) * self.K[i, i] - self.labelMat[j] * \
+                 (self.alphas[j] - alphaJold) * self.K[i, j]
+            b2 = self.b -Ej - self.labelMat[i] * (self.alphas[i] - alphaIold) * self.K[i, j] - self.labelMat[j] * \
+                 (self.alphas[j] - alphaJold) * self.K[j, j]
             if (0 < self.alphas[i]) and (self.C > self.alphas[i]):
                 self.b = b1
             elif (0 < self.alphas[j]) and (self.C > self.alphas[j]):
@@ -93,7 +108,7 @@ class optStruct:
             return 0
 
 def smoP(dataMatIn, classLabels, C, toler, maxIter, kTup=('lin', 0)):
-    opt = optStruct(mat(dataMatIn), mat(classLabels).transpose(), C, toler)
+    opt = optStruct(mat(dataMatIn), mat(classLabels).transpose(), C, toler, kTup)
     iter = 0
     entireSet = True
     alphaPairsChanged = 0
@@ -117,6 +132,16 @@ def smoP(dataMatIn, classLabels, C, toler, maxIter, kTup=('lin', 0)):
             entireSet = True
             print 'iteration number: %d' % iter
     return opt.b, opt.alphas
+
+def calcWs(alphas, dataArr, classLabels):
+    X = mat(dataArr)
+    labelMat = mat(classLabels).transpose()
+    m, n = shape(X)
+    w = zeros((n, 1))
+    for i in range(m):
+        w += multiply(alphas[i]*labelMat[i], X[i, :].T)
+
+    return w
 
 def loadDataSet(fileName):
     dataMat = []
@@ -143,6 +168,20 @@ def clipAlpha(aj, H, L):
         aj = L
 
     return aj
+
+def kernelTrans(X, A, kTup):
+    m, n = shape(X)
+    K = mat(zeros((m, 1)))
+    if kTup[0] == 'lin':
+        K = X * A.T
+    elif kTup[0] == 'rbf':
+        for j in range(m):
+            deltaRow = X[j, :] - A
+            K[j] = deltaRow * deltaRow.T
+        K = exp(K / (-1 * kTup[1] ** 2))
+    else:
+        raise NameError('Houston We Have a Problem -- That Kernel is not recognized')
+    return K
 
 #
 # 数据集，类别标签，常数C，容错率，退出前最大的循环次数
@@ -208,9 +247,39 @@ def smoSimple(dataMatIn, classLabels, C, toler, maxIter):
         print "iteration number: %d" % iter
     return b, alphas
 
+def testRbf(k1 = 0.3):
+    dataArr, labelArr = loadDataSet('testSetRBF.txt')
+    b, alphas = smoP(dataArr, labelArr, 200, 0.0001, 10000, ('rbf', k1))
+    dataMat = mat(dataArr)
+    labelMat = mat(labelArr).transpose()
+    svInd = nonzero(alphas.A > 0)[0]
+    svs = dataMat[svInd]
+    labelSV = labelMat[svInd]
+    print 'there are %d support vectors' % shape(svs)[0]
+    m, n = shape(dataMat)
+    errCount = 0
+    for i in range(m):
+        kernelEval = kernelTrans(svs, dataMat[i, :], ('rbf', k1))
+        predict = kernelEval.T * multiply(labelSV, alphas[svInd]) + b
+        if sign(predict) != sign(labelArr[i]):
+            errCount += 1
+    print 'the training error rate is: %f' % (float(errCount)/m)
+    dataArr, labelArr = loadDataSet('testSetRBF2.txt')
+    errCount = 0
+    dataMat = mat(dataArr)
+    labelMat = mat(labelArr).transpose()
+    m, n = shape(dataMat)
+    for i in range(m):
+        kernelEval = kernelTrans(svs, dataMat[i, :], ('rbf', k1))
+        predict = kernelEval.T * multiply(labelSV, alphas[svInd]) + b
+        if sign(predict) != sign(labelArr[i]):
+            errCount += 1
+    print 'the test error rate is:%f' % (float(errCount) /m)
+
 if __name__ == "__main__":
-    dataArr, labelArr = loadDataSet('testset.txt')
-    b, alphas = smoP(dataArr, labelArr, 0.6, 0.001, 40)
-    for i in range(100):
-        if alphas[i] > 0.0:
-            print dataArr[i], labelArr[i]
+    testRbf()
+    # dataArr, labelArr = loadDataSet('testset.txt')
+    # b, alphas = smoP(dataArr, labelArr, 0.6, 0.001, 40)
+    # for i in range(100):
+    #     if alphas[i] > 0.0:
+    #         print dataArr[i], labelArr[i]
