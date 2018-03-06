@@ -113,8 +113,6 @@ def plotROC(predStrengths, classLabels):
     print 'the Ares Under the curve is:', ySum*xStep
 
 
-
-
 def adaClassify(dataToClass, classifierArr):
     dataMatrix = mat(dataToClass)
     m = shape(dataMatrix)[0]
