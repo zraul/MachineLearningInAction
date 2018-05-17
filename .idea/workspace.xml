@@ -2,9 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b6f685e9-d528-4d14-8c94-bf2024e3d375" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/ch11/apriori.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ch15/mrSVM.py" beforeDir="false" afterPath="$PROJECT_DIR$/ch15/mrSVM.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ch11/apriori.py" beforeDir="false" afterPath="$PROJECT_DIR$/ch11/apriori.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -14,7 +13,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/MachineLearningInAction$apriori.coverage" NAME="apriori Coverage Results" MODIFIED="1523612963960" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ch11" />
+    <SUITE FILE_PATH="coverage/MachineLearningInAction$apriori.coverage" NAME="apriori Coverage Results" MODIFIED="1525350240450" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ch11" />
     <SUITE FILE_PATH="coverage/MachineLearningInAction$svmMLiA.coverage" NAME="svmMLiA Coverage Results" MODIFIED="1519718899979" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ch06" />
     <SUITE FILE_PATH="coverage/MachineLearningInAction$regTree.coverage" NAME="regTree Coverage Results" MODIFIED="1523265969943" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ch09" />
     <SUITE FILE_PATH="coverage/MachineLearningInAction$logRegres.coverage" NAME="logRegres Coverage Results" MODIFIED="1518330544484" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ch05" />
@@ -86,7 +85,7 @@
       <file leaf-file-name="mrSVM.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ch15/mrSVM.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="737">
+            <state relative-caret-position="1273">
               <caret line="69" column="81" selection-start-line="69" selection-start-column="81" selection-end-line="69" selection-end-column="81" />
               <folding>
                 <element signature="e#16#35#0" expanded="true" />
@@ -98,8 +97,8 @@
       <file leaf-file-name="apriori.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ch11/apriori.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="501">
-              <caret line="34" column="34" lean-forward="true" selection-start-line="34" selection-start-column="34" selection-end-line="34" selection-end-column="34" />
+            <state relative-caret-position="710">
+              <caret line="80" column="23" selection-start-line="80" selection-start-column="23" selection-end-line="80" selection-end-column="23" />
             </state>
           </provider>
         </entry>
@@ -427,7 +426,7 @@
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="7" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32673994" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2446386" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.27045274" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="right" id="SciView" order="3" weight="0.32962668" />
@@ -780,7 +779,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ch15/mrSVM.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="737">
+        <state relative-caret-position="1273">
           <caret line="69" column="81" selection-start-line="69" selection-start-column="81" selection-end-line="69" selection-end-column="81" />
           <folding>
             <element signature="e#16#35#0" expanded="true" />
@@ -790,8 +789,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ch11/apriori.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="501">
-          <caret line="34" column="34" lean-forward="true" selection-start-line="34" selection-start-column="34" selection-end-line="34" selection-end-column="34" />
+        <state relative-caret-position="710">
+          <caret line="80" column="23" selection-start-line="80" selection-start-column="23" selection-end-line="80" selection-end-column="23" />
         </state>
       </provider>
     </entry>
