@@ -1,6 +1,23 @@
 # -*- coding:utf-8 -*-
 
 from numpy import *
+from time import sleep
+from votesmart import votesmart
+votesmart.apikey = 'a7fa40adec6f4a77178799fae4441030'
+
+def getActionIds():
+    actionIdList = []
+    billTitleList = []
+
+    fr = open('recent20bills.txt')
+    for line in fr.readlines():
+        billNum = int(line.split('\t')[0])
+        try:
+            billDetail = votesmart.votes.getBill(billNum)
+            for action in billDetail.actions:
+                if action.level == 'House' and (action.stage == 'Passage' or actiopn.stage == 'Amendment Vote'):
+
+
 
 def loadDataSet():
     return [[1, 3, 4], [2, 3, 5], [1, 2, 3, 5], [2, 5]]
@@ -79,7 +96,7 @@ def calcConf(freqSet, H, supportData, brl, minConf=0.7):
     for conseq in H:
         conf = supportData[freqSet]/supportData[freqSet - conseq]
         if conf >= minConf:
-            print freqSet - conseq,'-->','conf:',conf
+            print freqSet - conseq,'-->', conseq,'conf:',conf
             brl.append((freqSet-conseq, conseq, conf))
             prunedH.append(conseq)
 
@@ -96,9 +113,9 @@ def rulesFromConseq(freqSet, H, supportData, brl, minConf=0.7):
 
 if __name__ == '__main__':
     dataSet = loadDataSet()
-    L, suppData = apriori(dataSet)
-    print L
-    print aprioriGen(L[0], 2)
+    L, suppData = apriori(dataSet, minSupport=0.5)
+    rules = generateRules(L, suppData, minConf=0.5)
+    print rules
     # C1 = createC1(dataSet)
     # D = map(set, dataSet)
     # L1, suppData0 = scanD(D, C1, 0.5)
