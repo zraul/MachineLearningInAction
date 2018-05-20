@@ -16,6 +16,16 @@ def getActionIds():
             billDetail = votesmart.votes.getBill(billNum)
             for action in billDetail.actions:
                 if action.level == 'House' and (action.stage == 'Passage' or actiopn.stage == 'Amendment Vote'):
+                    actionId = int(action.actionId)
+                    print("bill: %d has actionId: %d" % (billNum, actionId))
+                    actionIdList.append(actionId)
+                    billTitleList.append(line.strip().split('\t')[1])
+        except:
+            print('problem getting bill %d' % billNum)
+        
+        sleep(1)
+
+    return actionIdList, billTitleList
 
 
 
@@ -96,7 +106,7 @@ def calcConf(freqSet, H, supportData, brl, minConf=0.7):
     for conseq in H:
         conf = supportData[freqSet]/supportData[freqSet - conseq]
         if conf >= minConf:
-            print freqSet - conseq,'-->', conseq,'conf:',conf
+            print (freqSet - conseq,'-->', conseq,'conf:',conf)
             brl.append((freqSet-conseq, conseq, conf))
             prunedH.append(conseq)
 
@@ -115,7 +125,7 @@ if __name__ == '__main__':
     dataSet = loadDataSet()
     L, suppData = apriori(dataSet, minSupport=0.5)
     rules = generateRules(L, suppData, minConf=0.5)
-    print rules
+    print(rules)
     # C1 = createC1(dataSet)
     # D = map(set, dataSet)
     # L1, suppData0 = scanD(D, C1, 0.5)
