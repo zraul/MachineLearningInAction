@@ -13,21 +13,48 @@ def getActionIds():
     for line in fr.readlines():
         billNum = int(line.split('\t')[0])
         try:
-            billDetail = votesmart.votes.getBill(billNum)
+            billDetail = votesmart.votes.getBill(billNum) #api call
             for action in billDetail.actions:
-                if action.level == 'House' and (action.stage == 'Passage' or actiopn.stage == 'Amendment Vote'):
+                if action.level == 'House' and \
+                (action.stage == 'Passage' or action.stage == 'Amendment Vote'):
                     actionId = int(action.actionId)
-                    print("bill: %d has actionId: %d" % (billNum, actionId))
+                    print 'bill: %d has actionId: %d' % (billNum, actionId)
                     actionIdList.append(actionId)
                     billTitleList.append(line.strip().split('\t')[1])
         except:
-            print('problem getting bill %d' % billNum)
-        
-        sleep(1)
-
+            print "problem getting bill %d" % billNum
+        sleep(1)                                      #delay to be polite
     return actionIdList, billTitleList
 
+def getTransList(actionIdList, billTitleList):
+    itemMeaning = ['Republican', 'Democratic']
+    for billTitle in billTitleList:
+        itemMeaning.append('%s -- Nay' % billTitle)
+        itemMeaning.append('%s -- Yea' % billTitle)
 
+    transDict = {}
+    voteCount = 2
+    for actionId in actionIdList:
+        sleep(3)
+        print('getting votes for actionId: %d' % actionId)
+        try:
+            voteList = votesmart.votes.getBillActionVotes(actionId)
+            for vote in voteList:
+                if not transDict.has_key(vote.candidateName):
+                    transDict[vote.candidateName] = []
+                    if vote.officeParties == 'Democratic':
+                        transDict[vote.candidateName].append(1)
+                    elif vote.officeParties == 'Republican':
+                        transDict[vote.candidateName].append(0)
+                if vote.action == 'Nay':
+                    transDict[vote.candidateName].append(voteCount)
+                elif vote.action == 'Yea':
+                    transDict[vote.candidateName].append(voteCount + 1)
+        except:
+            print('problem getting actionId:%d' % actionId)
+        voteCount += 2
+
+    return transDict, itemMeaning
 
 def loadDataSet():
     return [[1, 3, 4], [2, 3, 5], [1, 2, 3, 5], [2, 5]]
@@ -122,10 +149,15 @@ def rulesFromConseq(freqSet, H, supportData, brl, minConf=0.7):
 
 
 if __name__ == '__main__':
-    dataSet = loadDataSet()
-    L, suppData = apriori(dataSet, minSupport=0.5)
-    rules = generateRules(L, suppData, minConf=0.5)
-    print(rules)
+    mushDataSet = [line.split() for line in open('mushroom.dat').readlines()]
+    L, suppData = apriori(mushDataSet, minSupport=0.3)
+    for item in L[1]:
+        if item.intersection('2'):
+            print(item)
+    # dataSet = loadDataSet()
+    # L, suppData = apriori(dataSet, minSupport=0.5)
+    # rules = generateRules(L, suppData, minConf=0.5)
+    # print(rules)
     # C1 = createC1(dataSet)
     # D = map(set, dataSet)
     # L1, suppData0 = scanD(D, C1, 0.5)
