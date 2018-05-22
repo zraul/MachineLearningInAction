@@ -40,6 +40,7 @@ def createTree(dataSet, minSup=1):
         for item in trans:
             headerTable[item] = headerTable.get(item, 0) + dataSet[trans]
 
+    # 移除不满足最小支持度的元素项
     for k in headerTable.keys():
         if headerTable[k] < minSup:
             del(headerTable[k])
@@ -70,8 +71,10 @@ def updateTree(items, inTree, headerTable, count):
     else:
         inTree.children[items[0]] = treeNode(items[0], count, inTree)
         if headerTable[items[0]][1] == None:
-            headerTable[items[0]][1] == inTree.children[items[0]]
+            # 为空直接添加
+            headerTable[items[0]][1] = inTree.children[items[0]]
         else:
+            # 非空调整数头结点
             updateHeader(headerTable[items[0]][1], inTree.children[items[0]])
 
     if len(items) > 1:
@@ -83,6 +86,49 @@ def updateHeader(nodeToTest, targetNode):
 
     nodeToTest.nodeLink = targetNode
 
+# 迭代上溯整棵树
+def ascendTree(leafNode, prefixPath):
+    if leafNode.parent != None:
+        prefixPath.append(leafNode.name)
+        ascendTree(leafNode.parent, prefixPath)
+
+def findPrefixPath(basePat, treeNode):
+    condPats = {}
+    while treeNode != None:
+        prefixPath = []
+        ascendTree(treeNode, prefixPath)
+        if len(prefixPath) > 1:
+            condPats[frozenset(prefixPath[1:])] = treeNode.count
+        treeNode = treeNode.nodeLink
+
+    return condPats
+
+def mineTree(inTree, headerTable, minSup, preFix, freqItemList):
+    bigL = [v[0] for v in sorted(headerTable.items(), key=lambda p: p[1])]
+
+    for basePat in bigL:
+        newFreqSet = preFix.copy()
+        newFreqSet.add(basePat)
+        freqItemList.append(newFreqSet)
+        condPattBases = findPrefixPath(basePat, headerTable[basePat][1])
+        myCondTree, myHead = createTree(condPattBases, minSup)
+
+        if myHead != None:
+            mineTree(myCondTree, myHead, minSup, newFreqSet, freqItemList)
+
+    return
 
 if __name__ == '__main__':
-    loadDataSet()
+    parsedDat = [line.split() for line in open('kosarak.dat').readlines()]
+    initSet = createInitSet(parsedDat)
+    myFPtree, myHeaderTab = createTree(initSet, 100000)
+    myFreqList = []
+    mineTree(myFPtree, myHeaderTab, 100000, set([]), myFreqList)
+    print len(myFreqList)
+    print myFreqList
+
+    # simpDat = loadSimpDat()
+    # initSet = createInitSet(simpDat)
+    # myFPTree, myHeaderTab = createTree(initSet, 3)
+    # freqItems = []
+    # mineTree(myFPTree, myHeaderTab, 3, set([]), freqItems)
