@@ -2,6 +2,17 @@
 
 from numpy import *
 
+
+def replaceNanWithMean():
+    dataMat = loadDataSet('secom.data', ' ')
+    numFeat = shape(dataMat)[1]
+    for i in range(numFeat):
+        # 计算所有非Nan均值
+        meanVal = mean(dataMat[nonzero(~isnan(dataMat[:, i].A))[0], i])
+        dataMat[nonzero(isnan(dataMat[:,i].A))[0], i] = meanVal
+
+    return dataMat
+
 def loadDataSet(fileName, delime='\t'):
     stringArr = [line.strip().split(delime) for line in open(fileName).readlines()]
     datArr = [map(float, line) for line in stringArr]
@@ -22,6 +33,7 @@ def pca(dataMat, topNfeat=9999999):
 
 
 if __name__ == "__main__":
-    dataMat = loadDataSet('testSet.txt')
-    lowDMat, reconMat = pca(dataMat, 1)
-    print shape(lowDMat), reconMat
+    replaceNanWithMean()
+    # dataMat = loadDataSet('testSet.txt')
+    # lowDMat, reconMat = pca(dataMat, 1)
+    # print shape(lowDMat)

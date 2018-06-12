@@ -2,9 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b6f685e9-d528-4d14-8c94-bf2024e3d375" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/ch13/pca.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ch13/testSet.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ch13/secom.data" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ch14/svdRec.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ch13/pca.py" beforeDir="false" afterPath="$PROJECT_DIR$/ch13/pca.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -16,7 +17,7 @@
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/MachineLearningInAction$apriori.coverage" NAME="apriori Coverage Results" MODIFIED="1526873416476" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ch11" />
     <SUITE FILE_PATH="coverage/MachineLearningInAction$regTree.coverage" NAME="regTree Coverage Results" MODIFIED="1523265969943" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ch09" />
-    <SUITE FILE_PATH="coverage/MachineLearningInAction$pca.coverage" NAME="pca Coverage Results" MODIFIED="1528200017199" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ch13" />
+    <SUITE FILE_PATH="coverage/MachineLearningInAction$pca.coverage" NAME="pca Coverage Results" MODIFIED="1528774816496" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ch13" />
     <SUITE FILE_PATH="coverage/MachineLearningInAction$logRegres.coverage" NAME="logRegres Coverage Results" MODIFIED="1518330544484" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ch05" />
     <SUITE FILE_PATH="coverage/MachineLearningInAction$adaboost.coverage" NAME="adaboost Coverage Results" MODIFIED="1520394113771" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ch07" />
     <SUITE FILE_PATH="coverage/MachineLearningInAction$regression.coverage" NAME="regression Coverage Results" MODIFIED="1522748424287" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/ch08" />
@@ -34,17 +35,29 @@
       <file leaf-file-name="fpGrowth.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ch12/fpGrowth.py">
           <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2413">
+              <caret line="127" column="22" selection-start-line="127" selection-start-column="22" selection-end-line="127" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pca.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ch13/pca.py">
+          <provider selected="true" editor-type-id="text-editor">
             <state>
               <caret selection-end-column="22" />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pca.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/ch13/pca.py">
+      <file leaf-file-name="svdRec.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/ch14/svdRec.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="361">
-              <caret line="19" column="39" lean-forward="true" selection-start-line="19" selection-start-column="39" selection-end-line="19" selection-end-column="39" />
+            <state relative-caret-position="834">
+              <caret line="67" column="54" selection-start-line="67" selection-start-column="54" selection-end-line="67" selection-end-column="54" />
+              <folding>
+                <element signature="e#24#43#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -60,7 +73,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>dict</find>
       <find>createplot</find>
       <find>classify</find>
       <find>re.</find>
@@ -90,6 +102,7 @@
       <find>server</find>
       <find>createC1</find>
       <find>createTree</find>
+      <find>Nan</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$</dir>
@@ -131,6 +144,8 @@
         <option value="$PROJECT_DIR$/ch11/apriori.py" />
         <option value="$PROJECT_DIR$/ch12/fpGrowth.py" />
         <option value="$PROJECT_DIR$/ch13/pca.py" />
+        <option value="$PROJECT_DIR$/ch14/svg.py" />
+        <option value="$PROJECT_DIR$/ch14/svdRec.py" />
       </list>
     </option>
   </component>
@@ -151,27 +166,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="MachineLearningInAction" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MachineLearningInAction" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MachineLearningInAction" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MachineLearningInAction" type="462c0819:PsiDirectoryNode" />
-              <item name="ch12" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="MachineLearningInAction" type="b2602c69:ProjectViewProjectNode" />
-              <item name="MachineLearningInAction" type="462c0819:PsiDirectoryNode" />
-              <item name="ch13" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
       <pane id="Scope">
         <subPane subId="Project Files">
           <expand>
@@ -188,6 +182,27 @@
           <select />
         </subPane>
       </pane>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="MachineLearningInAction" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MachineLearningInAction" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MachineLearningInAction" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MachineLearningInAction" type="462c0819:PsiDirectoryNode" />
+              <item name="ch14" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="MachineLearningInAction" type="b2602c69:ProjectViewProjectNode" />
+              <item name="MachineLearningInAction" type="462c0819:PsiDirectoryNode" />
+              <item name="ch15" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -196,16 +211,16 @@
     <property name="ignore_missing_gitignore" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/ch06" />
+      <recent name="$PROJECT_DIR$/ch05" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/ch13" />
       <recent name="$PROJECT_DIR$/ch12" />
       <recent name="$PROJECT_DIR$/ch11" />
       <recent name="$PROJECT_DIR$/ch10" />
       <recent name="$PROJECT_DIR$/ch09" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/ch06" />
-      <recent name="$PROJECT_DIR$/ch05" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -353,11 +368,11 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32673994" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32673994" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="7" />
       <window_info anchor="bottom" id="Terminal" order="7" weight="0.32673994" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2934869" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.30063543" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="right" id="SciView" order="3" weight="0.32962668" />
@@ -447,13 +462,17 @@
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="59" />
+      <default-breakpoints>
+        <breakpoint type="python-exception">
+          <properties notifyOnTerminate="true" exception="BaseException">
+            <option name="notifyOnTerminate" value="true" />
+          </properties>
+        </breakpoint>
+      </default-breakpoints>
+      <option name="time" value="62" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/Downloads/AppVersionAvgTime.py" />
-    <entry file="file://$USER_HOME$/Downloads/AppStartuptime.py" />
-    <entry file="file://$USER_HOME$/Downloads/AppStartup 2.py" />
     <entry file="file://$USER_HOME$/Downloads/Common.py" />
     <entry file="file://$USER_HOME$/Downloads/AppStartup.py" />
     <entry file="file://$USER_HOME$/Downloads/AppStartup_recalculate.py" />
@@ -661,20 +680,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/ch15/mrMean.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="4" column="19" selection-start-line="4" selection-start-column="19" selection-end-line="4" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ch15/mrMeanMapper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="16" column="41" selection-start-line="16" selection-start-column="41" selection-end-line="16" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ch10/portlandClubs.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="418">
@@ -697,13 +702,6 @@
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/Library/Caches/PyCharm2018.1/python_stubs/-2125986627/__builtin__.py" />
-    <entry file="file://$PROJECT_DIR$/ch12/fpGrowth.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ch13/testSet.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="266">
@@ -711,10 +709,51 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/ch12/fpGrowth.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2413">
+          <caret line="127" column="22" selection-start-line="127" selection-start-column="22" selection-end-line="127" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ch13/secom.data">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="455">
+          <caret line="1517" column="3017" selection-start-line="1517" selection-start-column="3014" selection-end-line="1517" selection-end-column="3017" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ch14/svg.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/ch13/pca.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="361">
-          <caret line="19" column="39" lean-forward="true" selection-start-line="19" selection-start-column="39" selection-end-line="19" selection-end-column="39" />
+        <state>
+          <caret selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ch15/mrMean.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="380">
+          <caret line="20" column="25" lean-forward="true" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ch15/mrMeanMapper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="16" column="41" selection-start-line="16" selection-start-column="41" selection-end-line="16" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ch14/svdRec.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="834">
+          <caret line="67" column="54" selection-start-line="67" selection-start-column="54" selection-end-line="67" selection-end-column="54" />
+          <folding>
+            <element signature="e#24#43#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
